@@ -1,9 +1,8 @@
 module.exports =
 	emit: (type, ...args)->
-		handlers = @get-handlers type
-		if handlers.length > 0
-			for handler in handlers
-				handler ...args
+		[evt, ...sub] = type.split \:
+		for handler in @get-handlers evt
+			handler ...sub, ...args
 
 	get-handlers: (type)-> @{}_handlers[][type]
 	

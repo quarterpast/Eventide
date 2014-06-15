@@ -29,6 +29,15 @@ export 'Events':
 			ev = new class implements events
 			expect (-> ev.emit \error) .not.to.throw-error!
 
+		'should handle namespaced events': ->
+			ev = new class implements events
+			ev.on \foo handler = expect.sinon.stub!
+			ev.emit \foo:bar
+			expect handler .to.be.called-with \bar
+			ev.emit \foo:bar:baz
+			expect handler .to.be.called-with \bar \baz
+
+
 	'off':
 		'should remove all handlers of type': ->
 			ev = new class implements events
