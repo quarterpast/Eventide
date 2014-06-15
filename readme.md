@@ -44,6 +44,12 @@ Removes event handlers. If `event` is given, removes all handlers for `event`. I
 #### `.once(event, handler)`
 Like `on`, but removes the handler when the event has fired.
 
+#### `.onAny(handler)`
+Triggers when any event is emitted. The first argument is the event name.
+
+#### `.offAny([handler])`
+Remove a particular handler for `onAny`, or all handlers.
+
 ## What's wrong with EventEmitter (2)?
 Node's built-in EventEmitter and [EventEmitter2](https://github.com/asyncly/EventEmitter2) are great and all, but both require subclassing to use with your own objects. Eventide is a plain object, and its functions perform their own setup. Just mix in to whatever.
 
