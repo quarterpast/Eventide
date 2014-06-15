@@ -1,7 +1,8 @@
 module.exports =
 	emit: (type, ...args)->
-		if @{}_handlers[type]?
-			for let handler in that
+		handlers = @{}_handlers[][type]
+		if handlers.length > 0
+			for handler in handlers
 				handler ...args
 		else if type is \error
 			throw new Error 'Unhandled error event'

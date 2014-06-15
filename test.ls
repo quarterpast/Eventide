@@ -29,8 +29,25 @@ export 'Events':
 			ev = new class implements events
 			expect (-> ev.emit \error) .to.throw-error /Unhandled error event/
 
+		'should throw when an error handler has been removed':
+			'that particular handler': ->
+				ev = new class implements events
+				ev.on \error handler = ->
+				ev.off \error handler
+				expect (-> ev.emit \error) .to.throw-error /Unhandled error event/
 
-	
+			'all error handlers': ->
+				ev = new class implements events
+				ev.on \error handler = ->
+				ev.off \error
+				expect (-> ev.emit \error) .to.throw-error /Unhandled error event/
+
+			'all handlers': ->
+				ev = new class implements events
+				ev.on \error handler = ->
+				ev.off!
+				expect (-> ev.emit \error) .to.throw-error /Unhandled error event/
+
 	'should remove events':
 		'all of type': ->
 			ev = new class implements events
