@@ -1,4 +1,4 @@
-# Eventide
+# Eventide [![Build Status](https://travis-ci.org/quarterto/Eventide.svg)](https://travis-ci.org/quarterto/Eventide)
 
 Namespaced events as a mixin
 
