@@ -1,7 +1,8 @@
 module.exports =
 	emit: (type, ...args)->
 		[evt, ...sub] = type.split \:
-		for handler in @get-handlers evt
+		handlers = (@get-handlers evt) ++ if evt isnt type then @get-handlers type else []
+		for handler in handlers
 			handler ...sub, ...args
 
 	get-handlers: (type)-> @{}_handlers[][type]

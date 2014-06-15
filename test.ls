@@ -29,14 +29,24 @@ export 'Events':
 			ev = new class implements events
 			expect (-> ev.emit \error) .not.to.throw-error!
 
-		'should handle namespaced events': ->
-			ev = new class implements events
-			ev.on \foo handler = expect.sinon.stub!
-			ev.emit \foo:bar
-			expect handler .to.be.called-with \bar
-			ev.emit \foo:bar:baz
-			expect handler .to.be.called-with \bar \baz
+		'should handle namespaced events':
+			'at one level': ->
+				ev = new class implements events
+				ev.on \foo handler = expect.sinon.stub!
+				ev.emit \foo:bar
+				expect handler .to.be.called-with \bar
 
+			'at multiple levels': ->
+				ev = new class implements events
+				ev.on \foo handler = expect.sinon.stub!
+				ev.emit \foo:bar:baz
+				expect handler .to.be.called-with \bar \baz
+
+			'and entire emitted event': ->
+				ev = new class implements events
+				ev.on \foo:bar handler = expect.sinon.stub!
+				ev.emit \foo:bar
+				expect handler .to.be.called!
 
 	'off':
 		'should remove all handlers of type': ->
