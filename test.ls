@@ -25,28 +25,9 @@ export 'Events':
 			ev.emit \foo \bar \baz
 			expect handler .to.be.called-with \bar \baz
 
-		'should throw for an unhandled error event': ->
+		'shouldn\'t throw when error event is unhandled': ->
 			ev = new class implements events
-			expect (-> ev.emit \error) .to.throw-error /Unhandled error event/
-
-		'should throw when an error handler has been removed':
-			'that particular handler': ->
-				ev = new class implements events
-				ev.on \error handler = ->
-				ev.off \error handler
-				expect (-> ev.emit \error) .to.throw-error /Unhandled error event/
-
-			'all error handlers': ->
-				ev = new class implements events
-				ev.on \error handler = ->
-				ev.off \error
-				expect (-> ev.emit \error) .to.throw-error /Unhandled error event/
-
-			'all handlers': ->
-				ev = new class implements events
-				ev.on \error handler = ->
-				ev.off!
-				expect (-> ev.emit \error) .to.throw-error /Unhandled error event/
+			expect (-> ev.emit \error) .not.to.throw-error!
 
 	'should remove events':
 		'all of type': ->

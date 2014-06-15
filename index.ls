@@ -4,8 +4,6 @@ module.exports =
 		if handlers.length > 0
 			for handler in handlers
 				handler ...args
-		else if type is \error
-			throw new Error 'Unhandled error event'
 
 	get-handlers: (type)-> @{}_handlers[][type]
 	
