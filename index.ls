@@ -4,6 +4,8 @@ module.exports =
 		handlers = (@get-handlers evt) ++ if evt isnt type then @get-handlers type else []
 		for handler in handlers
 			handler ...sub, ...args
+		for handler in @[]_any-handlers
+			handler type, ...args
 
 	get-handlers: (type)-> @{}_handlers[][type]
 	
@@ -24,3 +26,11 @@ module.exports =
 		else
 			@_handlers = {}
 
+	on-any: (handler)->
+		@[]_any-handlers.push handler
+
+	off-any: (handler)->
+		if handler
+			@_any-handlers = [f for f in @[]_any-handlers when f isnt handler]
+		else
+			@_any-handlers = []

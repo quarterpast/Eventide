@@ -96,3 +96,29 @@ export 'Events':
 			expect handler1 .to.be.called-once!
 			expect handler2 .to.be.called-twice!
 
+	'onAny':
+		'should fire on any event': ->
+			ev = new class implements events
+			ev.on-any handler = expect.sinon.stub!
+			ev.emit \foo \bar
+			expect handler .to.be.called-with \foo \bar
+			ev.emit \baz:quuz \frob
+			expect handler .to.be.called-with \baz:quuz \frob
+
+	'offAny':
+		'should remove all handlers': ->
+			ev = new class implements events
+			ev.on-any handler = expect.sinon.stub!
+			ev.off-any!
+			ev.emit \foo
+			expect handler .to.be.not-called!
+		'should remove particular handlers': ->
+			ev = new class implements events
+			ev.on-any handler1 = expect.sinon.stub!
+			ev.on-any handler2 = expect.sinon.stub!
+			ev.off-any handler1
+			ev.emit \foo
+			expect handler1 .to.be.not-called!
+			expect handler2 .to.be.called-with \foo
+
+
