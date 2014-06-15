@@ -1,0 +1,27 @@
+{
+  "name": "eventide",
+  "version": "0.0.0",
+  "description": "events mixin",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/quarterto/Eventide.git"
+  },
+  "keywords": [
+    "events"
+  ],
+  "author": "Matt Brennan <mwrbrennan@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/quarterto/Eventide/issues"
+  },
+  "homepage": "https://github.com/quarterto/Eventide",
+  "devDependencies": {
+    "LiveScript": "^1.2.0",
+    "karma-sinon-expect": "^0.1.4",
+    "mocha": "^1.20.1"
+  }
+}
