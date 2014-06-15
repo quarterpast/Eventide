@@ -4,14 +4,14 @@ require! {
 }
 
 export 'Events':
-	'should emit events':
-		'simple events': ->
+	'emit and on':
+		'should emit and handle simple events': ->
 			ev = new class implements events
 			ev.on \foo handler = expect.sinon.stub!
 			ev.emit \foo
 			expect handler .to.be.called!
 
-		'multiple handlers': ->
+		'should trigger multiple handlers': ->
 			ev = new class implements events
 			ev.on \foo handler1 = expect.sinon.stub!
 			ev.on \foo handler2 = expect.sinon.stub!
@@ -19,7 +19,7 @@ export 'Events':
 			expect handler1 .to.be.called!
 			expect handler2 .to.be.called!
 
-		'with arguments': ->
+		'should pass arguments to handlers': ->
 			ev = new class implements events
 			ev.on \foo handler = expect.sinon.stub!
 			ev.emit \foo \bar \baz
@@ -29,15 +29,15 @@ export 'Events':
 			ev = new class implements events
 			expect (-> ev.emit \error) .not.to.throw-error!
 
-	'should remove events':
-		'all of type': ->
+	'off':
+		'should remove all handlers of type': ->
 			ev = new class implements events
 			ev.on \foo handler = expect.sinon.stub!
 			ev.off \foo
 			ev.emit \foo
 			expect handler .to.be.not-called!
 
-		'particular handlers': ->
+		'should remove particular handlers': ->
 			ev = new class implements events
 			ev.on \foo handler1 = expect.sinon.stub!
 			ev.on \foo handler2 = expect.sinon.stub!
@@ -46,7 +46,7 @@ export 'Events':
 			expect handler1 .to.be.not-called!
 			expect handler2 .to.be.called!
 
-		'all events': ->
+		'should remove all events': ->
 			ev = new class implements events
 			ev.on \foo handler1 = expect.sinon.stub!
 			ev.on \bar handler2 = expect.sinon.stub!
