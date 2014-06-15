@@ -10,8 +10,8 @@ module.exports =
 		@{}_handlers[][type].push handler
 	
 	once: (type, handler)->
-		@on type, (args)~>
-			@off type, handler
+		@on type, :wrap (args)~>
+			@off type, wrap
 			handler ...args
 
 	off: (type, handler)->
