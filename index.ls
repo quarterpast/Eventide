@@ -1,14 +1,16 @@
 module.exports =
 	emit: (type, ...args)->
-		handlers = @{}_handlers[][type]
+		handlers = @get-handlers type
 		if handlers.length > 0
 			for handler in handlers
 				handler ...args
 		else if type is \error
 			throw new Error 'Unhandled error event'
+
+	get-handlers: (type)-> @{}_handlers[][type]
 	
 	on: (type, handler)->
-		@{}_handlers[][type].push handler
+		@get-handlers type .push handler
 	
 	once: (type, handler)->
 		@on type, :wrap (args)~>
@@ -18,7 +20,7 @@ module.exports =
 	off: (type, handler)->
 		if type
 			if handler
-				@{}_handlers[type] = [f for f in @{}_handlers[][type] when f isnt handler]
+				@{}_handlers[type] = [f for f in @get-handlers type when f isnt handler]
 			else
 				@{}_handlers[type] = []
 		else
