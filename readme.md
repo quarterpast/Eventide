@@ -24,7 +24,11 @@ var matt = new Person;
 matt.on('eaten', function(food) {
 	console.log('mmm, ' + food);
 });
+matt.on('eaten:banana', function() {
+	console.log('yuck');
+});
 matt.eat('peanut butter'); // => "mmm, peanut butter"
+matt.eat('banana'); // => "yuck"
 ```
 
 Or with Livescript's `implements`:
