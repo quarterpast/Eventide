@@ -58,4 +58,4 @@ Remove a particular handler for `onAny`, or all handlers.
 Node's built-in EventEmitter and [EventEmitter2](https://github.com/asyncly/EventEmitter2) are great and all, but both require subclassing to use with your own objects. Eventide is a plain object, and its functions perform their own setup. Just mix in to whatever.
 
 ## Licence
-MIT. &copy; 2014 Matt Brennan.
+MIT.
