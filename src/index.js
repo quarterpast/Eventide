@@ -8,6 +8,7 @@ function privateVal(map, val = {}) {
 	}
 }
 
+//TODO store handlers in a tree
 module.exports = {
 	emit(type, ...args) {
 		var [evt, ...sub] = Array.isArray(type) ? type : type.split(':');
