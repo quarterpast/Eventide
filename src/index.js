@@ -1,3 +1,5 @@
+var WeakMap = require('es6-weak-map');
+
 var handlers = new WeakMap();
 var anyHandlers = new WeakMap();
 
