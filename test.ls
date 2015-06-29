@@ -1,5 +1,5 @@
 require! {
-	events: './index.js'
+	events: './'
 	'karma-sinon-expect'.expect
 }
 

@@ -1,9 +1,9 @@
-all: index.js
+all: lib/index.js
 
-%.js: %.ls
+lib/%.js: src/%.ls
 	node_modules/.bin/lsc -c $<
 
-test: index.js test.ls
+test: lib/index.js test.ls
 	node_modules/.bin/mocha -r LiveScript -u exports test.ls
 
 .PHONY: test
