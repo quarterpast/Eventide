@@ -10,7 +10,7 @@ function privateVal(map, val = {}) {
 
 module.exports = {
 	emit(type, ...args) {
-		var [evt, ...sub] = type.split(':');
+		var [evt, ...sub] = Array.isArray(type) ? type : type.split(':');
 		var handlers = this.getHandlers(evt).concat(evt !== type ? this.getHandlers(type) : []);
 		handlers.forEach(handler => {
 			handler(...sub, ...args);
